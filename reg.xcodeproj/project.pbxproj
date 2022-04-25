@@ -72,12 +72,12 @@
 			children = (
 				E46BC70E2816750F00A0D45A /* AppDelegate.swift */,
 				E46BC7102816750F00A0D45A /* SceneDelegate.swift */,
-				E46BC7142816750F00A0D45A /* Main.storyboard */,
+				E46BC72E2816B6D900A0D45A /* Services */,
 				E46BC7312816B73100A0D45A /* ViewControllers */,
+				E46BC7142816750F00A0D45A /* Main.storyboard */,
 				E46BC7172816751100A0D45A /* Assets.xcassets */,
 				E46BC7192816751100A0D45A /* LaunchScreen.storyboard */,
 				E46BC71C2816751100A0D45A /* Info.plist */,
-				E46BC72E2816B6D900A0D45A /* Services */,
 			);
 			path = reg;
 			sourceTree = "<group>";
