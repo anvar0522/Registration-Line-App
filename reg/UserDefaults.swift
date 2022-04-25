@@ -14,11 +14,11 @@ class DataBase {
     enum SettingKeys:String {
         case users
     }
-
+    
     let defaults = UserDefaults.standard
     let userKey = SettingKeys.users.rawValue
-
-
+    
+    
     var users: [User] {
         get {
             if let data = defaults.value(forKey: userKey) as? Data {
@@ -26,7 +26,7 @@ class DataBase {
             } else {
                 return [User]()
             }
-
+            
         }
         set {
             if let data = try? PropertyListEncoder().encode(newValue) {
