@@ -15,11 +15,10 @@
 		E46BC72328167E2000A0D45A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72228167E2000A0D45A /* RegistrationViewController.swift */; };
 		E46BC72528167E4800A0D45A /* AuthWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72428167E4800A0D45A /* AuthWithEmailViewController.swift */; };
 		E46BC72928167E7000A0D45A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72828167E7000A0D45A /* SignUpViewController.swift */; };
-		E46BC72B28167F6B00A0D45A /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72A28167F6B00A0D45A /* UserDefaults.swift */; };
-		E46BC72D2816826600A0D45A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72C2816826600A0D45A /* UserModel.swift */; };
 		E46BC7302816B72400A0D45A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC72F2816B72400A0D45A /* SignInViewController.swift */; };
 		E46BC7332816CE6900A0D45A /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC7322816CE6900A0D45A /* LogOutViewController.swift */; };
 		E46BC7352816E46A00A0D45A /* toValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46BC7342816E46A00A0D45A /* toValidateViewController.swift */; };
+		E4AFBA82281813A400CCCBF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AFBA81281813A400CCCBF6 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +32,10 @@
 		E46BC72228167E2000A0D45A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		E46BC72428167E4800A0D45A /* AuthWithEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithEmailViewController.swift; sourceTree = "<group>"; };
 		E46BC72828167E7000A0D45A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E46BC72A28167F6B00A0D45A /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		E46BC72C2816826600A0D45A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		E46BC72F2816B72400A0D45A /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		E46BC7322816CE6900A0D45A /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
 		E46BC7342816E46A00A0D45A /* toValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toValidateViewController.swift; sourceTree = "<group>"; };
+		E4AFBA81281813A400CCCBF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +70,7 @@
 			children = (
 				E46BC70E2816750F00A0D45A /* AppDelegate.swift */,
 				E46BC7102816750F00A0D45A /* SceneDelegate.swift */,
-				E46BC72E2816B6D900A0D45A /* Services */,
+				E4AFBA8328185A4600CCCBF6 /* Services */,
 				E46BC7312816B73100A0D45A /* ViewControllers */,
 				E46BC7142816750F00A0D45A /* Main.storyboard */,
 				E46BC7172816751100A0D45A /* Assets.xcassets */,
@@ -80,15 +78,6 @@
 				E46BC71C2816751100A0D45A /* Info.plist */,
 			);
 			path = reg;
-			sourceTree = "<group>";
-		};
-		E46BC72E2816B6D900A0D45A /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				E46BC72A28167F6B00A0D45A /* UserDefaults.swift */,
-				E46BC72C2816826600A0D45A /* UserModel.swift */,
-			);
-			name = Services;
 			sourceTree = "<group>";
 		};
 		E46BC7312816B73100A0D45A /* ViewControllers */ = {
@@ -102,6 +91,14 @@
 				E46BC7342816E46A00A0D45A /* toValidateViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E4AFBA8328185A4600CCCBF6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E4AFBA81281813A400CCCBF6 /* NetworkManager.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,14 +173,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E46BC72928167E7000A0D45A /* SignUpViewController.swift in Sources */,
-				E46BC72D2816826600A0D45A /* UserModel.swift in Sources */,
 				E46BC72328167E2000A0D45A /* RegistrationViewController.swift in Sources */,
 				E46BC7352816E46A00A0D45A /* toValidateViewController.swift in Sources */,
+				E4AFBA82281813A400CCCBF6 /* NetworkManager.swift in Sources */,
 				E46BC7332816CE6900A0D45A /* LogOutViewController.swift in Sources */,
 				E46BC70F2816750F00A0D45A /* AppDelegate.swift in Sources */,
 				E46BC7302816B72400A0D45A /* SignInViewController.swift in Sources */,
 				E46BC7112816750F00A0D45A /* SceneDelegate.swift in Sources */,
-				E46BC72B28167F6B00A0D45A /* UserDefaults.swift in Sources */,
 				E46BC72528167E4800A0D45A /* AuthWithEmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

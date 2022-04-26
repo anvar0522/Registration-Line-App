@@ -10,8 +10,9 @@ import UIKit
 class SignInViewController: UIViewController {
     
     @IBOutlet var passwordTF: UITextField!
-    var emails = ""
+    
     var hitEmail = ""
+    var isEvent = true
     @IBOutlet var hitMail: UILabel!
     
     
@@ -20,32 +21,46 @@ class SignInViewController: UIViewController {
         hitMail.text = "Sign Up with \(hitEmail)"
     }
     
-    
     @IBAction func signInTapped() {
-        let password = passwordTF.text ?? ""
-        let user = findUserData(password: password)
-        
-        user?.password == password
-        ? performSegue(withIdentifier: "endVC", sender: self)
-        : showAlert(title: "Oooops", message: "Неправильный пароль!")
+        signIn()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "endVC" {
+        isEvent = true
+        if segue.identifier == "toValidate" {
             guard let destination = segue.destination as? toValidateViewController else { return }
             destination.password = passwordTF.text ?? ""
         }
     }
-    
-    private func findUserData(password:String) -> User? {
-        let dataBase = DataBase.shared.users
-        print(dataBase)
-        for user in dataBase {
-            if user.password == password {
-                return user
+    func signIn() {
+        let password = passwordTF.text ?? ""
+        let email = hitEmail
+        
+        let params: [String: Any] = ["email" : email,
+                                     "password" : password]
+        let urlSingIn = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/sign-in"
+        NetworkManager.shared.postRequest(with: params, to: urlSingIn) { result in
+            DispatchQueue.main.async {
+                
+                switch result {
+                case .success(let json):
+                    guard let parsedDictionary = json as? [String: Any] else { return }
+                    guard let data = parsedDictionary["message"] as? [String: Any?] else { return }
+                    
+                    if data["En"] as! String == "Password is incorrect" {
+                        self.showAlert(title: "Oooops", message: "Password is incorrect")
+                    } else if data["En"] as! String == "Password empty" {
+                        self.showAlert(title: "Oooops", message: "Password empty")
+                    } else {
+                        self.performSegue(withIdentifier: "toValidate", sender: self)
+                    }
+                    print(json)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    
+                }
             }
         }
-        return nil
     }
 }
 

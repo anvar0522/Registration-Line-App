@@ -20,44 +20,51 @@ class AuthWithEmailViewController: UIViewController {
         } else {
             alertLabel.text = "Wrong format"
             alertLabel.textColor = .systemRed
-            
         }
     }
-    
     
     @IBAction func authWithEmail(_ sender: UIButton) {
         
         if isValidEmail(emailTF.text!) == false {
             showAlert(title: "Ooooops", message: "Введите корректный почтовый адрес!")
+        } else {
+            findEmail()
         }
-        let mail = emailTF.text ?? ""
-        let user = findUserData(mail: mail)
         
-        user?.email == nil
-        ? performSegue(withIdentifier: "signUp", sender: self)
-        : performSegue(withIdentifier: "signIn", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "signUp" {
             guard let destination = segue.destination as? SignUpViewController else { return }
-            destination.emails = emailTF.text ?? "get the vibe"
+            destination.emails = emailTF.text ?? ""
         } else   {
             guard let destination = segue.destination as? SignInViewController else { return }
-            destination.emails = emailTF.text ?? "get the vibe"
             destination.hitEmail = emailTF.text ?? ""
         }
     }
     
-    private func findUserData(mail:String) -> User? {
-        let dataBase = DataBase.shared.users
-        print(dataBase)
-        for user in dataBase {
-            if user.email == mail {
-                return user
+    private func findEmail() {
+        let mail = emailTF.text ?? ""
+        
+        let json: [String: Any] = ["email" : mail]
+        let urlSearchEmail = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/search_email"
+        NetworkManager.shared.postRequest(with: json, to: urlSearchEmail) { result in
+            switch result {
+            case .success(let passed):
+                print(passed)
+                if passed as! [String : String] == ["message": "no"] {
+                    DispatchQueue.main.async {[weak self] in
+                        self?.performSegue(withIdentifier: "signUp", sender: self)
+                    }
+                } else {
+                    DispatchQueue.main.async {[weak self] in
+                        self?.performSegue(withIdentifier: "signIn", sender: self)
+                    }
+                }
+            case .failure(_):
+                self.showAlert(title: "Oooops", message: "Something went wrong, contact with our support")
             }
         }
-        return nil
     }
     
     private func isValidEmail(_ email: String) -> Bool {
@@ -67,6 +74,7 @@ class AuthWithEmailViewController: UIViewController {
         
     }
 }
+
 extension AuthWithEmailViewController: UITextFieldDelegate {
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -79,7 +87,6 @@ extension AuthWithEmailViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
         view.endEditing(true)
-        
     }
 }
 

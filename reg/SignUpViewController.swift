@@ -14,7 +14,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet var nameTf: UITextField!
     var emails = ""
     
-    
     override func viewWillAppear(_ animated: Bool) {
         emailLabel.text = "For \( emails)"
     }
@@ -24,11 +23,7 @@ class SignUpViewController: UIViewController {
         if passwordTF.text == "" || nameTf.text == "" {
             showAlert(title: "Oooops", message: "Корректно введите все поля!")
         } else {
-            performSegue(withIdentifier: "logOut", sender: self)
-            let password = passwordTF.text ?? ""
-            let name = nameTf.text ?? ""
-            let email = emails
-            DataBase.shared.saveUser(userName: name, email: email, password: password)
+            signUp()
         }
     }
     
@@ -36,6 +31,26 @@ class SignUpViewController: UIViewController {
         if segue.identifier == "logOut" {
             guard let destination = segue.destination as? LogOutViewController else { return }
             destination.toValidate = emailLabel.text ?? ""
+        }
+    }
+    
+    private func signUp() {
+        performSegue(withIdentifier: "logOut", sender: self)
+        let password = passwordTF.text ?? ""
+        let name = nameTf.text ?? ""
+        let email = emails
+        
+        let json: [String: Any] = ["name" : name,
+                                   "email" : email,
+                                   "password" : password]
+        let urlSignUp = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/sign-up"
+        NetworkManager.shared.postRequest(with: json, to: urlSignUp) { result in
+            switch result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

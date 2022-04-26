@@ -14,18 +14,4 @@ class RegistrationViewController: UIViewController {
     @IBAction func unwindFromValidateVC(for segue: UIStoryboardSegue) {
         
     }
-    
-    
-
-    func findUserData(mail:String) -> User? {
-        let dataBase = DataBase.shared.users
-print(dataBase)
-        for user in dataBase {
-            if user.email == mail {
-                return user
-            }
-        }
-        return nil
-    }
-
 }
