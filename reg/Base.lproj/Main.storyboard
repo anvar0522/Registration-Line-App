@@ -383,7 +383,7 @@
                     <connections>
                         <outlet property="hitMail" destination="nSY-Gq-sPv" id="P5s-QU-AOM"/>
                         <outlet property="passwordTF" destination="fBl-fw-4vL" id="RKb-iu-cmu"/>
-                        <segue destination="i5P-Ek-OMb" kind="show" identifier="toValidate" id="hJk-FH-Cmy"/>
+                        <segue destination="i5P-Ek-OMb" kind="show" identifier="validateVC" id="QPt-17-Iwp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EFZ-is-9p7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

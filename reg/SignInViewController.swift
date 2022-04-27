@@ -12,7 +12,6 @@ class SignInViewController: UIViewController {
     @IBOutlet var passwordTF: UITextField!
     
     var hitEmail = ""
-    var isEvent = true
     @IBOutlet var hitMail: UILabel!
     
     
@@ -24,10 +23,9 @@ class SignInViewController: UIViewController {
     @IBAction func signInTapped() {
         signIn()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        isEvent = true
-        if segue.identifier == "toValidate" {
+        if segue.identifier == "validateVC" {
             guard let destination = segue.destination as? toValidateViewController else { return }
             destination.password = passwordTF.text ?? ""
         }
@@ -44,19 +42,17 @@ class SignInViewController: UIViewController {
                 
                 switch result {
                 case .success(let json):
+                    print(json)
                     guard let parsedDictionary = json as? [String: Any] else { return }
                     guard let data = parsedDictionary["message"] as? [String: Any?] else { return }
                     
-                    if data["En"] as! String == "Password is incorrect" {
-                        self.showAlert(title: "Oooops", message: "Password is incorrect")
-                    } else if data["En"] as! String == "Password empty" {
-                        self.showAlert(title: "Oooops", message: "Password empty")
-                    } else {
-                        self.performSegue(withIdentifier: "toValidate", sender: self)
+                    if data["En"] as! String != "Password is incorrect", data["En"] as! String != "Password empty" {
+                        self.performSegue(withIdentifier: "validateVC", sender: self)
+                    } else  {
+                        self.showAlert(title: "Ooops", message: "Password is incorrect!")
                     }
-                    print(json)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(error)
                     
                 }
             }
