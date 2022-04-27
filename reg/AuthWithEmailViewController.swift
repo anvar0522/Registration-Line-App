@@ -49,20 +49,18 @@ class AuthWithEmailViewController: UIViewController {
         let json: [String: Any] = ["email" : mail]
         let urlSearchEmail = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/search_email"
         NetworkManager.shared.postRequest(with: json, to: urlSearchEmail) { result in
-            switch result {
-            case .success(let passed):
-                print(passed)
-                if passed as! [String : String] == ["message": "no"] {
-                    DispatchQueue.main.async {[weak self] in
-                        self?.performSegue(withIdentifier: "signUp", sender: self)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let passed):
+                    print(passed)
+                    if passed as! [String : String] == ["message": "no"] {
+                        self.performSegue(withIdentifier: "signUp", sender: self)
+                    } else {
+                        self.performSegue(withIdentifier: "signIn", sender: self)
                     }
-                } else {
-                    DispatchQueue.main.async {[weak self] in
-                        self?.performSegue(withIdentifier: "signIn", sender: self)
-                    }
+                case .failure(_):
+                    self.showAlert(title: "Oooops", message: "Something went wrong, contact with our support")
                 }
-            case .failure(_):
-                self.showAlert(title: "Oooops", message: "Something went wrong, contact with our support")
             }
         }
     }

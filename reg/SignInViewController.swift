@@ -39,17 +39,15 @@ class SignInViewController: UIViewController {
         let urlSingIn = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/sign-in"
         NetworkManager.shared.postRequest(with: params, to: urlSingIn) { result in
             DispatchQueue.main.async {
-                
                 switch result {
                 case .success(let json):
                     print(json)
                     guard let parsedDictionary = json as? [String: Any] else { return }
-                    guard let data = parsedDictionary["message"] as? [String: Any?] else { return }
-                    
-                    if data["En"] as! String != "Password is incorrect", data["En"] as! String != "Password empty" {
-                        self.performSegue(withIdentifier: "validateVC", sender: self)
-                    } else  {
+                    if parsedDictionary ["email"] == nil {
                         self.showAlert(title: "Ooops", message: "Password is incorrect!")
+                    }
+                    else  {
+                        self.performSegue(withIdentifier: "validateVC", sender: self)
                     }
                 case .failure(let error):
                     print(error)
