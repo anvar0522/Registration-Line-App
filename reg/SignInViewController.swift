@@ -36,7 +36,7 @@ class SignInViewController: UIViewController {
         
         let params: [String: Any] = ["email" : email,
                                      "password" : password]
-        let urlSingIn = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/sign-in"
+        let urlSingIn = "someurl"
         NetworkManager.shared.postRequest(with: params, to: urlSingIn) { result in
             DispatchQueue.main.async {
                 switch result {

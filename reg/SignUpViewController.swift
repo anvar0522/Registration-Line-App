@@ -43,7 +43,7 @@ class SignUpViewController: UIViewController {
         let json: [String: Any] = ["name" : name,
                                    "email" : email,
                                    "password" : password]
-        let urlSignUp = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/sign-up"
+        let urlSignUp = "someurl"
         NetworkManager.shared.postRequest(with: json, to: urlSignUp) { result in
             switch result {
             case .success(let json):

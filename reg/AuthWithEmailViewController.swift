@@ -47,7 +47,7 @@ class AuthWithEmailViewController: UIViewController {
         let mail = emailTF.text ?? ""
         
         let json: [String: Any] = ["email" : mail]
-        let urlSearchEmail = "https://app-93b59acf-43d0-422b-a6d0-b28fed8b6c12.cleverapps.io/api/users/search_email"
+        let urlSearchEmail = "someurl"
         NetworkManager.shared.postRequest(with: json, to: urlSearchEmail) { result in
             DispatchQueue.main.async {
                 switch result {
